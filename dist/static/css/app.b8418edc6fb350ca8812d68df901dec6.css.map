@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack:///./src/components/Hello.vue"],"names":[],"mappings":"AACA,OACE,eAAiB","file":"static/css/app.b8418edc6fb350ca8812d68df901dec6.css","sourcesContent":["\nbutton {\n  background: #999;\n}\n\n\n\n// WEBPACK FOOTER //\n// ./src/components/Hello.vue"],"sourceRoot":""}
