@@ -14,7 +14,18 @@
       <swap></swap>
     </div>
     <div class="slideshow-wrapper">
-      <slideshow :timeout="800" :interval="1000"></slideshow>
+      <slideshow></slideshow>
+    </div>
+    <div class="info">
+      <h1 class="title">使用须知</h1>
+      <div class="content">
+        <p>1.欢迎使用新卓越考试系统，请使用报名提供的学号和密码登陆</p>
+        <p>2.首次登陆请修改密码，方可继续使用</p>
+        <p>3.忘记学号和密码请联系管理员</p>
+      </div>
+    </div>
+    <div class="footer">
+      <v-footer></v-footer>
     </div>
   </div>
 </template>
@@ -22,7 +33,13 @@
 import login from 'components/login/login'
 import swap from 'components/swap/swap'
 import slideshow from 'components/slideshow/slideshow'
+import footer from 'components/footer/footer'
 export default {
+  props: {
+    manager: {
+      type: String
+    }
+  },
   data() {
     return {
       loginState: false
@@ -39,16 +56,16 @@ export default {
   components: {
     login: login,
     swap: swap,
-    slideshow: slideshow
+    slideshow: slideshow,
+    'v-footer': footer
   }
 }
 </script>
 <style lang="stylus">
 .home
   position: relative
-  padding: 10px 30px
   .header
-    width: 100%
+    padding: 10px 30px
     height: 100px
     background: #fff
     .logo
@@ -66,13 +83,13 @@ export default {
   .login-wrapper
     position: fixed
     padding: 30px
-    width: 200px
-    height: 250px
+    width: 260px
+    height: 300px
     top: 50%
     left: 50%
     z-index: 100
-    margin-left: -150px
-    margin-top: -125px
+    margin-left: -130px
+    margin-top: -150px
     background: #fff
     border-radius: 10px
     border: 1px solid #999
@@ -84,4 +101,18 @@ export default {
     width: 100%
     height: 100%
     overflow: hidden
+  .info
+    width: 500px
+    margin: 20px auto
+    .title
+      text-align: center
+      font-size: 20px
+      color: red
+      line-height: 40px
+    .content
+      p
+        font-size: 16px
+        color: #29bdb9
+        text-align: left
+        line-height: 26px
 </style>

@@ -1,13 +1,18 @@
 <template>
-  <div>
-    <home></home>
+  <div id="app">
+    <router-view :manager="manager"></router-view>
   </div>
 </template>
 <script>
-import home from 'components/home/home';
 export default {
-  components: {
-    home: home
+  data() {
+    return {
+      manager: ''
+    }
   }
 }
 </script>
+<style lang="stylus">
+#app
+  height: 100%
+</style>

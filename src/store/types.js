@@ -1,4 +1,4 @@
-export const INCREASE = 'INCREASE';
-// 累加
-export const RESET = 'RESET';
-// 清零
+export const LOGIN = 'LOGIN';
+// 登陆
+export const LOGOUT = 'LOGOUT';
+// 退出
