@@ -3,6 +3,8 @@ import router from './router';
 import store from 'store/index';
 import App from './App';
 
+import './common/stylus/index.styl';
+
 new Vue({
   el: '#app',
   router,

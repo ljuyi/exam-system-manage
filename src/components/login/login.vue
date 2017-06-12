@@ -4,12 +4,12 @@
         <form>
             <input type="text" placeholder="请输入账号" v-model="name">
             <input type="password" placeholder="请输入密码" v-model="psd">
-            <form class="label" >
-                <input type="radio" id="student" name="state" v-model="type">
+            <div class="label">
+                <input type="radio" id="student" value="学生" v-model="type">
                 <label for="student">学生</label>
-                <input type="radio" id="teacher" name="state" v-model="type" checked="true">
+                <input type="radio" id="teacher" value="教师" v-model="type">
                 <label for="teacher">教师</label>
-            </form>
+            </div>
         </form>
         <button class="btn" @click="login">登陆</button>
     </div>
@@ -20,14 +20,14 @@ export default {
         return {
             name: '',
             psd: '',
-            type: ''
+            type: '教师'
         }
     },
     methods: {
         login() {
-            if (this.name !== null) {
+            if (this.name !== null && this.psd !== null && this.type !== null) {
                 console.log(this.$store.getters)
-                this.$store.dispatch('LOGIN', {name: this.name, psd: this.psd, type: this.type});
+                this.$store.dispatch('LOGIN', { name: this.name, psd: this.psd, type: this.type });
                 this.$router.replace('/manage');
             }
         }

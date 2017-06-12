@@ -24,8 +24,8 @@
         <p>3.忘记学号和密码请联系管理员</p>
       </div>
     </div>
-    <div class="footer">
-      <v-footer></v-footer>
+    <div class="footer-wrapper">
+      <v-footer type="out"></v-footer>
     </div>
   </div>
 </template>
@@ -115,4 +115,9 @@ export default {
         color: #29bdb9
         text-align: left
         line-height: 26px
+  .footer-wrapper
+    position: fixed
+    bottom: 0
+    width: 100%
+    height: 50px
 </style>

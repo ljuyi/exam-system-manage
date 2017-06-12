@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <router-view :manager="manager"></router-view>
+    <keep-alive>
+      <router-view :manager="manager"></router-view>
+    </keep-alive>
   </div>
 </template>
 <script>

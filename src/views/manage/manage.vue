@@ -3,55 +3,43 @@
         <div class="header-wrapper">
             <v-header></v-header>
         </div>
-        <div class="content">
-            <div class="tab">
-                <div class="tab-item">
-                    <router-link to="/exam-summary">考试概况</router-link>
-                </div>
-                <div class="tab-item">
-                    <router-link to="/student-manage">学员管理</router-link>
-                </div>
-                <div class="tab-item">
-                    <router-link to="/lesson-info">课程信息</router-link>
-                </div>
-                <div class="tab-item">
-                    <router-link to="/subject-library">题库管理</router-link>
-                </div>
-                <div class="tab-item">
-                    <router-link to="/exam-manage">考试管理</router-link>
-                </div>
-                <div class="tab-item">
-                    <router-link to="/member-manage">成员管理</router-link>
-                </div>
-                <div class="tab-item">
-                    <router-link to="/exam-grade">考试成绩</router-link>
-                </div>
-                <div class="tab-item">
-                    <router-link to="/grade-details">成绩明细</router-link>
-                </div>
-                <div class="tab-item">
-                    <router-link to="/super-manage">超级管理</router-link>
+        <div class="body">
+            <div class="tab-wrapper">
+                <tab></tab>
+            </div>
+            <div class="content">
+                <div class="footer-wrapper">
+                    <v-footer type="in"></v-footer>
                 </div>
             </div>
-            <router-view :manager="manager"></router-view>
         </div>
+        <router-view :manager="manager"></router-view>
     </div>
 </template>
 <script>
 import header from 'components/header/header'
+import tab from 'components/tab/tab'
+import footer from 'components/footer/footer'
 export default {
+    data() {
+        return {}
+    },
+    methods: {
+    },
     computed: {
         manager() {
             return this.$store.getters.getManager;
         }
     },
     components: {
-        'v-header': header
+        'v-header': header,
+        tab: tab,
+        'v-footer': footer
     },
-    created() {
-        if (!this.$store.getters.getManager) {
-            this.$router.push('/');
-        }
+    mounted() {
+        // if (!this.$store.getters.getManager) {
+        //     this.$router.push('/');
+        // }
     }
 }
 </script>
@@ -62,16 +50,21 @@ export default {
   .header-wrapper
     position: fixed
     width: 100%
-    height: 30px
-  .content
+    height: 40px
+  .body
     display: flex
     height: 100%
-    .tab
+    .tab-wrapper
+      padding: 40px 0 0 0
       flex: 0 0 16.667%
-      height: 100%
       background: rgba(34,45,50,1)
-      .tab-item
-        width: 100%
-        height: 50px
-        text-align: center
+    .content
+      width: 100%
+      position: relative
+    .footer-wrapper
+      position: absolute
+      left: 0;
+      bottom: 0
+      width: 100%
+      height: 30px
 </style>

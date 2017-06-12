@@ -46,11 +46,11 @@ export default {
     vertical-align: top
     font-size: 16px
     color: #000
-    line-height: 30px
+    line-height: 40px
   .broadcast-wrapper
     flex: 1
-    padding: 5px 0
-    height: 30px
+    padding: 10px 0
+    height: 40px
     vertical-align: top
     overflow: hidden
     cursor: pointer
@@ -59,5 +59,5 @@ export default {
   .person
     float: right
     font-size: 14px
-    line-height: 30px
+    line-height: 40px
 </style>
