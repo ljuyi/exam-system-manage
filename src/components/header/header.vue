@@ -42,15 +42,16 @@ export default {
   height: 100%
   background: rgba(60,144,188,0.6)
   .title
-    flex: 0 0 200px
+    flex: 0 0 16.667%
     vertical-align: top
     font-size: 16px
     color: #000
-    line-height: 40px
+    line-height: 35px
+    text-align: center
   .broadcast-wrapper
     flex: 1
-    padding: 10px 0
-    height: 40px
+    padding: 7.5px 0
+    height: 35px
     vertical-align: top
     overflow: hidden
     cursor: pointer
@@ -59,5 +60,8 @@ export default {
   .person
     float: right
     font-size: 14px
-    line-height: 40px
+    line-height: 35px
+    a
+      color: #428bca    
+      cursor: pointer
 </style>

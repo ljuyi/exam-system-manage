@@ -7,7 +7,7 @@
             <i class="iconfont" v-else>&#xe697;</i>
             <transition name="tabSlide">
                 <ul v-if="list.list" class="t" :ref="list.tag" v-show="show[list.tag]">
-                    <li class="tab-item" v-for="list in list.list">
+                    <li class="tab-item" v-for="list in list.list" @click.stop>
                         <i class="iconfont" :class="list.icon"></i>
                         <router-link :to="list.router">{{list.content}}</router-link>
                     </li>
@@ -29,12 +29,12 @@ export default {
                 {
                     icon: 'icon-naviconround',
                     content: '考试概况',
-                    router: 'manage/exam-summary'
+                    router: '/manage/exam-summary'
                 },
                 {
                     icon: 'icon-person-stalker',
                     content: '学员管理',
-                    router: 'manage/student-manage'
+                    router: '/manage/student-manage'
                 },
                 {
                     icon: 'icon-ioslistoutline',
@@ -63,7 +63,7 @@ export default {
                         {
                             icon: 'icon-androiddoneall',
                             content: '考试管理',
-                            router: '/manage'
+                            router: '/manage/exam-manage'
                         },
                         {
                             icon: 'icon-androiddoneall',

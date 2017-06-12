@@ -8,12 +8,12 @@
                 <tab></tab>
             </div>
             <div class="content">
+                <router-view></router-view>
                 <div class="footer-wrapper">
                     <v-footer type="in"></v-footer>
                 </div>
             </div>
         </div>
-        <router-view :manager="manager"></router-view>
     </div>
 </template>
 <script>
@@ -22,7 +22,8 @@ import tab from 'components/tab/tab'
 import footer from 'components/footer/footer'
 export default {
     data() {
-        return {}
+        return {
+        }
     },
     methods: {
     },
@@ -49,8 +50,9 @@ export default {
   height: 100%
   .header-wrapper
     position: fixed
+    z-index: 1
     width: 100%
-    height: 40px
+    height: 35px
   .body
     display: flex
     height: 100%
@@ -59,8 +61,10 @@ export default {
       flex: 0 0 16.667%
       background: rgba(34,45,50,1)
     .content
-      width: 100%
       position: relative
+      padding-top: 50px
+      width: 100%
+      background: rgb(236,240,245)
     .footer-wrapper
       position: absolute
       left: 0;
