@@ -10,6 +10,7 @@
                     <li class="tab-item" v-for="list in list.list" @click.stop>
                         <i class="iconfont" :class="list.icon"></i>
                         <router-link :to="list.router">{{list.content}}</router-link>
+                        <i class="iconfont">&#xe697;</i>
                     </li>
                 </ul>
             </transition>
@@ -50,7 +51,7 @@ export default {
                         {
                             icon: 'icon-ioslistoutline',
                             content: '题库管理',
-                            router: '/manage'
+                            router: '/manage/library-info'
                         }
                     ]
                 },

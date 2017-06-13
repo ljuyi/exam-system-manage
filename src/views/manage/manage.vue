@@ -60,7 +60,7 @@ export default {
       padding: 40px 0 0 0
       flex: 0 0 16.667%
       background: rgba(34,45,50,1)
-    .content
+    >.content
       position: relative
       padding-top: 50px
       width: 100%

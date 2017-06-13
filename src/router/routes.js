@@ -1,6 +1,6 @@
 import home from 'views/home/home'
 import manage from 'views/manage/manage'
-import examManage from 'views/examManage/examManage';
+import libraryInfo from 'views/library_info/library_info';
 export default [
     {
         path: '/',
@@ -13,9 +13,9 @@ export default [
         component: manage,
         children: [
             {
-                path: 'exam-manage',
-                name: 'examSummary',
-                component: examManage
+                path: 'library-info',
+                name: 'libraryInfo',
+                component: libraryInfo
             }
         ]
         //     {
