@@ -1,5 +1,5 @@
 <template>
-    <div class="exam-manage">
+    <div class="library-info">
         <h1 class="title">题库管理
             <span class="info">查看和管理题目信息</span>
         </h1>
@@ -12,7 +12,7 @@
             </div>
         </div>
         <div class="table-wrapper">
-            <vuetable table-wrapper="#content" :grid="grid" :fields="columns" :items="items"></vuetable>
+            <vuetable table-wrapper="#content" :tag="'library'" :grid="grid" :fields="columns" :items="items"></vuetable>
         </div>
     </div>
 </template>
@@ -71,7 +71,7 @@ export default {
 }
 </script>
 <style lang="stylus">
-.exam-manage
+.library-info
   width: 100%
   height: 100%
   .title

@@ -59,7 +59,8 @@ export default {
 }
 </script>
 <style lang="stylus">
-p
-  font-size: 16px
-  color: red
+.broadcast
+  p
+    font-size: 16px
+    color: red
 </style>

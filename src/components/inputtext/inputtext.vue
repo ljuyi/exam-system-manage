@@ -32,9 +32,11 @@ export default {
     border-radius: 0 10px 10px 0
     cursor: pointer
   input
+    display: inline-block
     padding-left: 20px
-    width: 89%
+    width: 88%
     height: 100%
+    line-height: 34px
     outline: none
     font-size: 14px
     border-radius: 10px 0 0 10px

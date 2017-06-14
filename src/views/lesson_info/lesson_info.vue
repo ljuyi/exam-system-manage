@@ -5,8 +5,8 @@
         </h1>
         <div class="input">
             <div class="btn-wrapper">
-                <add-btn></add-btn>
-                <delete-btn></delete-btn>
+                <btn :info="'添加'"></btn>
+                <button :info="'删除'"></button>
             </div>
             <div class="input-wrapper">
                 <input-text></input-text>
@@ -19,9 +19,9 @@
 </template>
 <script>
 import inputtext from 'components/inputtext/inputtext'
-import addBtn from 'components/button/add'
-import deleteBtn from 'components/button/delete'
+import btn from 'components/button/button'
 import vuetable from 'components/vuetable/vuetable'
+import axios from 'axios'
 export default {
     data() {
         return {
@@ -47,9 +47,16 @@ export default {
             ]
         }
     },
+    created() {
+        axios.get('http://orc2mim1t.bkt.clouddn.com/examManage')
+            .then((response) => {
+                let data = response.data;
+                console.log(Array.from(data));
+                this.items = Array.from(data);
+            })
+    },
     components: {
-        'add-btn': addBtn,
-        'delete-btn': deleteBtn,
+        btn,
         'input-text': inputtext,
         vuetable
     }
