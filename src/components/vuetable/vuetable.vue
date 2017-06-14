@@ -7,7 +7,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(item, index) in items" @click.stop="showAlert">
+        <tr v-for="(item, index) in items" @click.stop="showAlert(index)">
           <td v-for="(value, key, index) in item" :class="key" :style="{width:grid[index]}">{{value}}</td>
           <td class="operation" :style="{width:grid[grid.length-1]}">
             <i class="iconfont">&#xe682;</i>/
@@ -20,8 +20,8 @@
       <swap></swap>
     </div>
     <div class="alert-wrapper" v-show="showLibraryAlert||showSubjectAlert">
-      <libraryAlert v-show="this.showLibraryAlert" :option="libraryOption" v-on:hideSwap="hideAlert"></libraryAlert>
-      <subjectAlert v-show="this.showSubjectAlert" :option="subjectOption"></subjectAlert>
+      <libraryAlert v-show="this.showLibraryAlert" :option="libraryOption" v-on:hideSwap="hideAlert" :items="items" :index="clickIndex"></libraryAlert>
+      <subjectAlert v-show="this.showSubjectAlert" :option="subjectOption" v-on:hideSwap="hideAlert" :items="items" :index="clickIndex"></subjectAlert>
     </div>
   </div>
 </template>
@@ -39,7 +39,8 @@ export default {
       },
       subjectOption: {
         title: '课程信息'
-      }
+      },
+      clickIndex: ''
     }
   },
   props: {
@@ -63,18 +64,22 @@ export default {
   },
   events: {
     'hideSwap': function() {
-      alert(111);
     }
   },
   methods: {
-    showAlert() {
+    showAlert(index) {
       if (this.tag === 'library') {
         this.showLibraryAlert = true
       } else if (this.tag === 'subject') {
         this.showSubjectAlert = true
       }
+      this.clickIndex = index
     },
-    hideAlert() {
+    hideAlert(obj) {
+      if (obj) {
+        this.items[obj.index]['content'] = obj.question
+        this.items[obj.index]['answer'] = obj.answer
+      }
       if (this.tag === 'library') {
         this.showLibraryAlert = false
       } else if (this.tag === 'subject') {

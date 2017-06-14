@@ -1,6 +1,6 @@
 <template>
   <div class="input-text">
-      <input type="text">
+      <input type="text" :value="value">
       <span>搜索</span>
   </div>
 </template>
@@ -9,6 +9,12 @@ export default {
   props: {
       option: {
           type: Object
+      },
+      value: {
+        type: String,
+        default() {
+          return ''
+        }
       }
   }
 }
@@ -33,7 +39,7 @@ export default {
     cursor: pointer
   input
     display: inline-block
-    padding-left: 20px
+    padding-left: 10px
     width: 88%
     height: 100%
     line-height: 34px
