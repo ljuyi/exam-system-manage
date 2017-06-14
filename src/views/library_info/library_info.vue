@@ -12,7 +12,7 @@
             </div>
         </div>
         <div class="table-wrapper">
-            <vuetable table-wrapper="#content" :fields="columns" :items="items"></vuetable>
+            <vuetable table-wrapper="#content" :grid="grid" :fields="columns" :items="items"></vuetable>
         </div>
     </div>
 </template>
@@ -32,6 +32,15 @@ export default {
                 '题目类型',
                 '题目答案',
                 '操作'
+            ],
+            grid: [
+                '130px',
+                '220px',
+                '130px',
+                '130px',
+                '130px',
+                '220px',
+                '100px'
             ],
             items: [],
             selectOption: {

@@ -46,7 +46,7 @@ export default {
                         {
                             icon: 'icon-ioslistoutline',
                             content: '课程信息',
-                            router: '/manage'
+                            router: '/manage/lesson-info'
                         },
                         {
                             icon: 'icon-ioslistoutline',

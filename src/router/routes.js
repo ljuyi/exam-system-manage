@@ -1,6 +1,7 @@
 import home from 'views/home/home'
 import manage from 'views/manage/manage'
-import libraryInfo from 'views/library_info/library_info';
+import libraryInfo from 'views/library_info/library_info'
+import lessonInfo from 'views/lesson_info/lesson_info'
 export default [
     {
         path: '/',
@@ -16,18 +17,18 @@ export default [
                 path: 'library-info',
                 name: 'libraryInfo',
                 component: libraryInfo
-            }
-        ]
+            },
         //     {
         //         path: '/student-manage',
         //         name: 'studentManege',
         //         component: ''
         //     },
-        //     {
-        //         path: '/lesson-info',
-        //         name: 'lessonInfo',
-        //         component: ''
-        //     },
+            {
+                path: 'lesson-info',
+                name: 'lessonInfo',
+                component: lessonInfo
+            }
+        ]
         //     {
         //         path: '/subject-library',
         //         name: 'subjectLibary',
