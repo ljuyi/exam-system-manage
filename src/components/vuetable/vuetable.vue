@@ -29,6 +29,7 @@
 import libraryAlert from 'components/alert/library'
 import subjectAlert from 'components/alert/subject'
 import swap from 'components/swap/swap'
+import axios from 'axios'
 export default {
   data() {
     return {
@@ -40,7 +41,7 @@ export default {
       subjectOption: {
         title: '课程信息'
       },
-      clickIndex: ''
+      clickIndex: 0
     }
   },
   props: {
@@ -73,12 +74,16 @@ export default {
       } else if (this.tag === 'subject') {
         this.showSubjectAlert = true
       }
-      this.clickIndex = index
+      this.clickIndex = Number(index)
     },
     hideAlert(obj) {
       if (obj) {
         this.items[obj.index]['content'] = obj.question
         this.items[obj.index]['answer'] = obj.answer
+        axios.post('http://localhost:4000/libraryUpdate', {data: this.items})
+             .then((response) => {
+               console.log(response)
+             })
       }
       if (this.tag === 'library') {
         this.showLibraryAlert = false

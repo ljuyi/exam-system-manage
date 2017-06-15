@@ -4,11 +4,11 @@
     <div class="content">
       <p>题目内容</p>
       <div class="question">
-        <textarea>{{items[index]['content']}}</textarea>
+        <textarea ref="question" v-model="question">{{question}}</textarea>
       </div>
       <div class="answer">
         <p>题目答案</p>
-        <textarea>{{items[index]['answer']}}</textarea>
+        <textarea ref="answer" v-model="answer">{{answer}}</textarea>
       </div>
       <div class="b">
         <div class="btn-wrapper" @click="commit">
@@ -26,6 +26,8 @@ import btn from 'components/button/button'
 export default {
   data() {
     return {
+      question: this.items[this.index].content,
+      answer: this.items[this.index].answer
     }
   },
   props: {
@@ -42,11 +44,11 @@ export default {
   methods: {
     commit() {
       // 保存信息
-      this.$emit('hideSwap', {index: this.index, question: this.items[this.index]['content'], answer: this.items[this.index]['answer']})
+      this.$emit('hideSwap', {index: this.index, question: this.question, answer: this.answer})
     },
     cancle() {
       // 不保存信息
-      this.$emit('hideSwap', event.target)
+      this.$emit('hideSwap')
     }
   },
   components: {
