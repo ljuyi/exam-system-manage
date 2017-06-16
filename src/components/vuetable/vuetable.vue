@@ -19,9 +19,9 @@
     <div class="swap-wrapper" v-show="showLibraryAlert||showSubjectAlert" @click="hideAlert">
       <swap></swap>
     </div>
-    <div class="alert-wrapper" v-show="showLibraryAlert||showSubjectAlert">
-      <libraryAlert v-show="this.showLibraryAlert" :option="libraryOption" v-on:hideSwap="hideAlert" :items="items" :index="clickIndex"></libraryAlert>
-      <subjectAlert v-show="this.showSubjectAlert" :option="subjectOption" v-on:hideSwap="hideAlert" :items="items" :index="clickIndex"></subjectAlert>
+    <div class="alert-wrapper" v-if="showLibraryAlert||showSubjectAlert">
+      <libraryAlert v-if="this.showLibraryAlert" :option="libraryOption" v-on:hideSwap="hideAlert" :items="items" :index="clickIndex"></libraryAlert>
+      <subjectAlert v-if="this.showSubjectAlert" :option="subjectOption" v-on:hideSwap="hideAlert" :items="items" :index="clickIndex"></subjectAlert>
     </div>
   </div>
 </template>
