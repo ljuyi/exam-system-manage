@@ -7,10 +7,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(item, index) in items" @click.stop="showAlert(index)">
+        <tr v-for="(item, index) in items" v-if="select==='全部'||select===item['type']" @click.stop="showAlert(index)">
           <td v-for="(value, key, index) in item" :class="key" :style="{width:grid[index]}">{{value}}</td>
           <td class="operation" :style="{width:grid[grid.length-1]}">
-            <i class="iconfont">&#xe682;</i>/
+            <i class="iconfont" @click.stop="deleteL(index)">&#xe682;</i>/
             <i class="iconfont">&#xe630;</i>
           </td>
         </tr>
@@ -20,8 +20,8 @@
       <swap></swap>
     </div>
     <div class="alert-wrapper" v-if="showLibraryAlert||showSubjectAlert">
-      <libraryAlert v-if="this.showLibraryAlert" :option="libraryOption" v-on:hideSwap="hideAlert" :items="items" :index="clickIndex"></libraryAlert>
-      <subjectAlert v-if="this.showSubjectAlert" :option="subjectOption" v-on:hideSwap="hideAlert" :items="items" :index="clickIndex"></subjectAlert>
+      <libraryAlert v-if="this.showLibraryAlert" :option="libraryOption" v-on:hideSwap="hideAlert"></libraryAlert>
+      <subjectAlert v-if="this.showSubjectAlert" :option="subjectOption" v-on:hideSwap="hideAlert"></subjectAlert>
     </div>
   </div>
 </template>
@@ -41,8 +41,13 @@ export default {
       subjectOption: {
         title: '课程信息'
       },
-      clickIndex: 0
+      select: this.$store.getters.getSelect
     }
+  },
+  mounted() {
+    this.$watch('$store.getters.getSelect', () => {
+      this.select = this.$store.getters.getSelect
+    })
   },
   props: {
     fields: {
@@ -71,25 +76,39 @@ export default {
     showAlert(index) {
       if (this.tag === 'library') {
         this.showLibraryAlert = true
+        let obj = {
+          index: index,
+          content: this.items[index]['content'],
+          answer: this.items[index]['answer'],
+          type: this.items[index]['type'],
+          kind: this.items[index]['kind'],
+          time: this.items[index]['time']
+        }
+        this.$store.dispatch('setLibrary', obj)
       } else if (this.tag === 'subject') {
         this.showSubjectAlert = true
       }
-      this.clickIndex = Number(index)
     },
     hideAlert(obj) {
       if (obj) {
-        this.items[obj.index]['content'] = obj.question
-        this.items[obj.index]['answer'] = obj.answer
-        axios.post('http://localhost:4000/libraryUpdate', {data: this.items})
-             .then((response) => {
-               console.log(response)
-             })
+        for (let key in obj) {
+          if (key !== 'index') {
+            this.items[obj.index][key] = obj[key]
+          }
+        }
       }
       if (this.tag === 'library') {
         this.showLibraryAlert = false
       } else if (this.tag === 'subject') {
         this.showSubjectAlert = false
       }
+    },
+    deleteL(index) {
+      this.items.splice(index, 1)
+      axios.post('http://localhost:4000/libraryUpdate', { data: this.items })
+        .then((response) => {
+          console.log(response)
+        })
     }
   }
 }
@@ -150,9 +169,9 @@ export default {
     position: fixed
     z-index: 101
     width: 500px
-    height: 400px
+    height: 500px
     left: 50%
     top: 50%
-    margin-top: -200px
+    margin-top: -250px
     margin-left: -250px
 </style>

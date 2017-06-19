@@ -20,6 +20,7 @@ filePath = './libraryInfo'
 function uploadFile(uptoken, key, localFile) {
     var extra = new qiniu.io.PutExtra();
     qiniu.io.putFile(uptoken, key, localFile, extra, function (err, ret) {
+        console.log(111)
         if (!err) {
             // 上传成功， 处理返回值
             console.log(ret.hash, ret.key, ret.persistentId);

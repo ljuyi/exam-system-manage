@@ -26,7 +26,6 @@ export default {
     methods: {
         login() {
             if (this.name !== null && this.psd !== null && this.type !== null) {
-                console.log(this.$store.getters)
                 this.$store.dispatch('LOGIN', { name: this.name, psd: this.psd, type: this.type });
                 this.$router.replace('/manage');
             }

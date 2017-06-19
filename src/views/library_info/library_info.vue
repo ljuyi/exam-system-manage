@@ -4,8 +4,12 @@
             <span class="info">查看和管理题目信息</span>
         </h1>
         <div class="input">
+            <div class="btn-wrapper">
+                <btn :info="'添加'" @click="addLibrary"></btn>
+                <btn :info="'删除'" @click="deleteLibrary"></btn>
+            </div>
             <div class="drop-wrapper">
-                <dropselect :option="this.selectOption"></dropselect>
+                <dropselect :option="this.selectOption" v-on:changeType="changeType"></dropselect>
             </div>
             <div class="input-wrapper">
                 <inputtext></inputtext>
@@ -21,6 +25,7 @@ import axios from 'axios'
 import vuetable from 'components/vuetable/vuetable'
 import dropselect from 'components/dropselect/dropselect'
 import inputtext from 'components/inputtext/inputtext'
+import btn from 'components/button/button'
 export default {
     data() {
         return {
@@ -47,10 +52,11 @@ export default {
                 type: '请选择题目类型',
                 select: [
                     '全部',
-                    '软件设计师',
+                    '软师',
                     '程序员',
                     '计算机网络',
-                    'java后台开发'
+                    'java后台开发',
+                    '前端'
                 ]
             }
         }
@@ -63,10 +69,20 @@ export default {
                 this.items = Array.from(data);
             })
     },
+    methods: {
+        addLibrary() {
+        },
+        deleteLibrary() {
+        },
+        changeType(select) {
+            this.$store.dispatch('setSelect', { select })
+        }
+    },
     components: {
         vuetable,
         dropselect,
-        inputtext
+        inputtext,
+        btn
     }
 }
 </script>

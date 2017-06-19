@@ -6,7 +6,7 @@
         <div class="input">
             <div class="btn-wrapper">
                 <btn :info="'添加'"></btn>
-                <button :info="'删除'"></button>
+                <btn :info="'删除'"></btn>
             </div>
             <div class="input-wrapper">
                 <input-text></input-text>
@@ -84,7 +84,7 @@ export default {
     justify-content: space-between
     .btn-wrapper
       display: inline-block
-      width: 80px
+      width: 150px
       height: 34px
       border-radius: 7px
     .input-wrapper

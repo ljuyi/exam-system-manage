@@ -29,6 +29,7 @@ export default {
         chose(index) {
             this.select = this.option.select[index];
             this.show = false;
+            this.$emit('changeType', this.select)
         }
     }
 }
