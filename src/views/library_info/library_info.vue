@@ -14,8 +14,8 @@
                 <inputtext></inputtext>
             </div>
         </div>
-        <div class="table-wrapper">
-            <vuetable table-wrapper="#content" :tag="'library'" :grid="grid" :fields="columns" :items="items" v-on:showAlert="showAlert"></vuetable>
+        <div class="table-wrapper" style="height:450px;overflow:hidden">
+            <vuetable table-wrapper="#content" :tag="'library'" :grid="grid" :fields="columns" :items="items" v-on:showAlert="showAlert" :size="tableSize"></vuetable>
         </div>
         <div class="swap-wrapper" v-show="showLibraryAlert||showSubjectAlert" @click="hideAlert">
             <swap></swap>
@@ -40,6 +40,10 @@ import page from 'components/page/page'
 export default {
     data() {
         return {
+            tableSize: {
+                height: 450,
+                top: 0
+            },
             currentPage: 1,
             showLibraryAlert: false,
             showSubjectAlert: false,
@@ -92,6 +96,7 @@ export default {
         },
         changeType(select) {
             this.$store.dispatch('setSelect', { select })
+            this.tableSize.top = 0
         },
         showAlert(index) {
             this.showLibraryAlert = true
@@ -119,24 +124,28 @@ export default {
             this.showLibraryAlert = false
         },
         nextPage() {
-            this.currentPage ++
+            this.currentPage++
             axios.get('http://localhost:4000/libraryInfo?page=' + this.currentPage)
                 .then((response) => {
                     let data = JSON.parse(response.data.data);
                     this.currentPage = response.data.page;
-                    this.items = Array.from(data);
+                    data.forEach((e, i) => {
+                        this.items.push(e)
+                    })
+                    if (this.items.length > 8) {
+                        this.tableSize.height *= 2
+                        this.tableSize.top -= 460
+                    }
                 })
-                console.log(this.items)
         },
         lastPage() {
             if (this.currentPage > 1) {
-                this.currentPage --
+                this.currentPage--
             }
             axios.get('http://localhost:4000/libraryInfo?page=' + this.currentPage)
                 .then((response) => {
-                    let data = JSON.parse(response.data.data);
-                    this.currentPage = response.data.page;
-                    this.items = Array.from(data);
+                    //     let data = JSON.parse(response.data.data);
+                    //     this.currentPage = response.data.page;
                 })
         }
     },
@@ -179,6 +188,7 @@ export default {
       width: 500px
       height: 34px
   .table-wrapper
+    position: relative
     margin-top: 20px
     margin-left: auto
     margin-right: auto

@@ -61,6 +61,7 @@ export default {
     transform: rotate(360deg) scale(0.1, 0.1)
   .select
     position: absolute
+    z-index: 20
     width: 200px
     border-radius: 0 0 10px 10px
     transition: all 0.2s linear

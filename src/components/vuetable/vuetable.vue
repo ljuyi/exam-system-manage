@@ -1,5 +1,5 @@
 <template>
-  <div class="vuetable">
+  <div class="vuetable" ref="table" :style="{top:size.top+'px',height:size.height}">
     <table>
       <thead>
         <tr>
@@ -30,6 +30,8 @@ export default {
     this.$watch('$store.getters.getSelect', () => {
       this.select = this.$store.getters.getSelect
     })
+    console.log(this.$refs.table.style.height)
+    this.$refs.table.style.height = this.size.height
   },
   props: {
     fields: {
@@ -41,11 +43,9 @@ export default {
     grid: {
       type: Array
     },
-    tag: {
-      type: String
+    size: {
+      type: Object
     }
-  },
-  components: {
   },
   events: {
     'hideSwap': function() {
@@ -68,9 +68,11 @@ export default {
 </script>
 <style lang="stylus">
 .vuetable
+  position: absolute
+  width: 100%
+  height: 100%
   table
     width: 100%
-    height: auto
     thead
       width: 100%
       height: 30px
