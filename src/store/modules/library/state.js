@@ -1,8 +1,9 @@
 export default {
+    id: '',
     content: '',
+    time: '',
     type: '',
     kind: '',
     answer: '',
-    index: '',
-    time: ''
+    staticId: 4
 }

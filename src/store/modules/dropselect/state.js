@@ -1,3 +1,3 @@
 export default {
-    select: ''
+    select: '全部'
 }

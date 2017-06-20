@@ -35,22 +35,13 @@
 <script>
 import btn from 'components/button/button'
 import dropselect from 'components/dropselect/dropselect'
-import axios from 'axios'
 export default {
   data() {
     return {
-      obj: {
-        index: this.$store.getters.getLibrary.index,
-        content: this.$store.getters.getLibrary.content,
-        answer: this.$store.getters.getLibrary.answer,
-        kind: this.$store.getters.getLibrary.kind,
-        type: this.$store.getters.getLibrary.type,
-        time: this.$store.getters.getLibrary.time
-      },
+      obj: this.$store.getters.getLibrary,
       dropOption: {
         type: this.$store.getters.getLibrary.type,
         select: [
-          '全部',
           '软件设计师',
           '程序员',
           '计算机网络',
@@ -70,16 +61,11 @@ export default {
   methods: {
     commit() {
       // 保存信息
-      this.$store.dispatch('setLibrary', this.obj)
-      axios.post('http://localhost:4000/libraryUpdate', { data: this.$store.getters.getLibrary })
-        .then((response) => {
-          console.log(response)
-        })
-      this.$emit('hideSwap', this.obj)
+      this.$emit('hideAlert', this.obj)
     },
     cancle() {
       // 不保存信息
-      this.$emit('hideSwap')
+      this.$emit('hideAlert')
     },
     changeType(select) {
       this.obj.type = select
