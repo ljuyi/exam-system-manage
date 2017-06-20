@@ -70,7 +70,7 @@ export default {
 .vuetable
   table
     width: 100%
-    height: 80%
+    height: auto
     thead
       width: 100%
       height: 30px

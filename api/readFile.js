@@ -1,3 +1,11 @@
-import writeFile from './writeFile'
+var fs = require('fs')
 
-writeFile('./path.txt', 'bbb')
+function readFile(path, body) {
+    fs.readFile(path, (err, data) => {
+        if (err) {
+            console.log(err)
+        }
+        body = data
+    })
+}
+module.exports = readFile

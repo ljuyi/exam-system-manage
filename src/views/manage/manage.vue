@@ -64,6 +64,8 @@ export default {
       position: relative
       padding-top: 50px
       width: 100%
+      height: 100%
+      overflow: auto
       background: rgb(236,240,245)
     .footer-wrapper
       position: absolute

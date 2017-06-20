@@ -23,6 +23,9 @@
         <div class="alert-wrapper" v-if="showLibraryAlert||showSubjectAlert">
             <libraryAlert v-if="this.showLibraryAlert" :option="libraryOption" v-on:hideAlert="hideAlert"></libraryAlert>
         </div>
+        <div class="page-wrapper">
+            <page v-on:nextPage="nextPage" v-on:lastPage="lastPage"></page>
+        </div>
     </div>
 </template>
 <script>
@@ -33,9 +36,11 @@ import inputtext from 'components/inputtext/inputtext'
 import btn from 'components/button/button'
 import libraryAlert from 'components/alert/library'
 import swap from 'components/swap/swap'
+import page from 'components/page/page'
 export default {
     data() {
         return {
+            currentPage: 1,
             showLibraryAlert: false,
             showSubjectAlert: false,
             libraryOption: {
@@ -64,19 +69,19 @@ export default {
                 type: '全部',
                 select: [
                     '全部',
-                    '软师',
-                    '程序员',
+                    '前端',
+                    'C/C++',
                     '计算机网络',
-                    'java后台开发',
-                    '前端'
+                    'JAVA'
                 ]
             }
         }
     },
     created() {
-        axios.get('http://orc2mim1t.bkt.clouddn.com/libraryInfo')
+        axios.get('http://localhost:4000/libraryInfo?page=1')
             .then((response) => {
-                let data = response.data;
+                let data = JSON.parse(response.data.data);
+                this.currentPage = response.data.page;
                 this.items = Array.from(data);
             })
     },
@@ -98,7 +103,7 @@ export default {
                 })
                 if (item) {
                     for (let key in obj) {
-                        if (item.hasProperty(key)) {
+                        if (key in item) {
                             item[key] = obj[key]
                         }
                     }
@@ -112,6 +117,27 @@ export default {
                     })
             }
             this.showLibraryAlert = false
+        },
+        nextPage() {
+            this.currentPage ++
+            axios.get('http://localhost:4000/libraryInfo?page=' + this.currentPage)
+                .then((response) => {
+                    let data = JSON.parse(response.data.data);
+                    this.currentPage = response.data.page;
+                    this.items = Array.from(data);
+                })
+                console.log(this.items)
+        },
+        lastPage() {
+            if (this.currentPage > 1) {
+                this.currentPage --
+            }
+            axios.get('http://localhost:4000/libraryInfo?page=' + this.currentPage)
+                .then((response) => {
+                    let data = JSON.parse(response.data.data);
+                    this.currentPage = response.data.page;
+                    this.items = Array.from(data);
+                })
         }
     },
     components: {
@@ -120,7 +146,8 @@ export default {
         inputtext,
         btn,
         libraryAlert,
-        swap
+        swap,
+        page
     }
 }
 </script>
@@ -172,4 +199,10 @@ export default {
     top: 50%
     margin-top: -250px
     margin-left: -250px
+  .page-wrapper
+    width: 150px
+    height: 30px
+    position: absolute
+    right: 50px
+    bottom: 10px
 </style>

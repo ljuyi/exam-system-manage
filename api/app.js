@@ -2,6 +2,7 @@ var express = require('express')
 var app = express()
 var bodyParser = require('body-parser')
 var writeFile = require('./writeFile')
+var fs = require('fs')
 
 app.use(bodyParser())
 
@@ -17,12 +18,36 @@ app.all('*', function (req, res, next) {
 app.get('/', function (req, res) {
     res.send('Hello world!');
 });
+app.get('/libraryInfo', function(req, res) {
+    let query = req.query
+    let page = query.page
+    fs.readFile('./libraryInfo.json', (err, data) => {
+        if (err) {
+            console.log(err)
+        } else {
+            let d = JSON.parse(data)
+            let maxPage = Math.ceil(d.length / 8)
+            if(page > maxPage) {
+                page  = maxPage
+            }
+            res.send({page: page, data: JSON.stringify(d.slice(8*page-8, 8*page>d.length?d.length:8*page))})
+        }
+    })
+})
+app.get('/subjectInfo', function(req, res) {
+    fs.readFile('./subjectInfo.json', (err, data) => {
+        if (err) {
+            console.log(err)
+        } else {
+            res.send(data)
+        }
+    })
+})
 app.post('/libraryUpdate', (req, res) => {
     if (req.body.data) {
         //能正确解析 json 格式的post参数
         res.send({ "status": "success", "name": req.body.data.name, "age": req.body.data.age });
-        writeFile('./libraryInfo', JSON.stringify(req.body.data))
-        require('./upload')
+        writeFile('./libraryInfo.json', JSON.stringify(req.body.data))
     } else {
         //不能正确解析json 格式的post参数
         var body = '', jsonStr;

@@ -42,11 +42,10 @@ export default {
       dropOption: {
         type: this.$store.getters.getLibrary.type,
         select: [
-          '软件设计师',
-          '程序员',
+          '前端',
+          'C/C++',
           '计算机网络',
-          'java后台开发',
-          '前端'
+          'JAVA'
         ]
       }
     }
