@@ -68,9 +68,8 @@ export default {
       overflow: auto
       background: rgb(236,240,245)
     .footer-wrapper
-      position: absolute
-      left: 0;
-      bottom: 0
+      margin-top: 20px
       width: 100%
       height: 30px
+      background: #fff
 </style>

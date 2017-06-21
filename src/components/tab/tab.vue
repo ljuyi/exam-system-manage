@@ -87,7 +87,7 @@ export default {
                         {
                             icon: 'icon-calculator',
                             content: '成绩明细',
-                            router: '/manage'
+                            router: '/manage/grade-details'
                         }
                     ]
                 },

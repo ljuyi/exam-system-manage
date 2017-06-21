@@ -15,7 +15,7 @@
             </div>
         </div>
         <div class="table-wrapper">
-            <vuetable table-wrapper="#content" :tag="'library'" :grid="grid" :fields="columns" :items="items" v-on:showAlert="showAlert" :size="tablePos"></vuetable>
+            <vuetable :grid="grid" :fields="columns" :items="items" v-on:showAlert="showAlert" :size="tablePos" v-on:update="update"></vuetable>
         </div>
         <div class="swap-wrapper" v-show="showLibraryAlert||showSubjectAlert" @click="hideAlert">
             <swap></swap>
@@ -126,7 +126,7 @@ export default {
         },
         nextPage() {
             if (this.currentPage < this.maxPage) {
-                this.currentPage ++
+                this.currentPage++
                 this.tablePos.top -= 400
             }
         },
@@ -139,6 +139,12 @@ export default {
         maxPageChange(maxPage) {
             this.maxPage = maxPage
             this.currentPage = 1
+        },
+        update(obj) {
+            axios.post('http://localhost:4000/libraryUpdate', { data: obj })
+                .then((response) => {
+                    console.log(response)
+                })
         }
     },
     components: {
@@ -208,5 +214,5 @@ export default {
     height: 30px
     position: absolute
     right: 50px
-    bottom: 10px
+    bottom: 35px
 </style>

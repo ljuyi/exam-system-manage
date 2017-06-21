@@ -36,6 +36,42 @@ app.get('/subjectInfo', function(req, res) {
         }
     })
 })
+app.get('/examInfo', function(req, res) {
+    fs.readFile('./examInfo.json', (err, data) => {
+        if (err) {
+            console.log(err)
+        } else {
+            res.send(data)
+        }
+    })
+})
+app.get('/studentInfo', function(req, res) {
+    fs.readFile('./studentInfo.json', (err, data) => {
+        if (err) {
+            console.log(err)
+        } else {
+            res.send(data)
+        }
+    })
+})
+app.get('/examManage', function(req, res) {
+    fs.readFile('./examManage.json', (err, data) => {
+        if (err) {
+            console.log(err)
+        } else {
+            res.send(data)
+        }
+    })
+})
+app.get('/gradeDetails', function(req, res) {
+    fs.readFile('./gradeDetail.json', (err, data) => {
+        if (err) {
+            console.log(err)
+        } else {
+            res.send(data)
+        }
+    })
+})
 app.post('/libraryUpdate', (req, res) => {
     if (req.body.data) {
         //能正确解析 json 格式的post参数
@@ -56,6 +92,27 @@ app.post('/libraryUpdate', (req, res) => {
                 jsonStr = null;
             }
             jsonStr ? writeFile('./test.txt', jsonStr) : res.send({ "status": "error" });
+        });
+        console.log(jsonStr)
+    }
+})
+app.post('/studentUpdate', (req, res) => {
+    if (req.body.data) {
+        res.send({"status": "success", "name": req.body.data.name, "age": req.body.data.age})
+        writeFile('./studentInfo.json', JSON.stringify(req.body.data))
+    } else {
+        var body = '', jsonStr;
+        req.on('data', function(chunk) {
+            body += chunk;
+        });
+        req.on('end', function() {
+            try {
+                jsonStr = JSON.parse(body);
+                console.log(jsonStr)
+            } catch (err) {
+                jsonStr = null;
+            }
+            jsonStr ? writeFile('./test.txt', jsonStr) : res.send({"status": "error"});
         });
         console.log(jsonStr)
     }

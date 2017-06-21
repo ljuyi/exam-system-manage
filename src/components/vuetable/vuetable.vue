@@ -19,7 +19,6 @@
   </div>
 </template>
 <script>
-import axios from 'axios'
 export default {
   data() {
     return {
@@ -56,10 +55,7 @@ export default {
   methods: {
     deleteL(index) {
       this.items.splice(index, 1)
-      axios.post('http://localhost:4000/libraryUpdate', { data: this.items })
-        .then((response) => {
-          console.log(response)
-        })
+      this.$emit('update', this.items)
     },
     showAlert(index) {
       this.$store.dispatch('setLibrary', this.items[index])
