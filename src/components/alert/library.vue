@@ -45,7 +45,8 @@ export default {
           '前端',
           'C/C++',
           '计算机网络',
-          'JAVA'
+          'JAVA',
+          '软件测试'
         ]
       }
     }

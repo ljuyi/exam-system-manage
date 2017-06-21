@@ -5,5 +5,5 @@ export default {
     type: '',
     kind: '',
     answer: '',
-    staticId: 4
+    staticId: 10
 }

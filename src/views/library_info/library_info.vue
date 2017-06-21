@@ -14,8 +14,8 @@
                 <inputtext></inputtext>
             </div>
         </div>
-        <div class="table-wrapper" style="height:450px;overflow:hidden">
-            <vuetable table-wrapper="#content" :tag="'library'" :grid="grid" :fields="columns" :items="items" v-on:showAlert="showAlert" :size="tableSize"></vuetable>
+        <div class="table-wrapper">
+            <vuetable table-wrapper="#content" :tag="'library'" :grid="grid" :fields="columns" :items="items" v-on:showAlert="showAlert" :size="tablePos"></vuetable>
         </div>
         <div class="swap-wrapper" v-show="showLibraryAlert||showSubjectAlert" @click="hideAlert">
             <swap></swap>
@@ -24,7 +24,7 @@
             <libraryAlert v-if="this.showLibraryAlert" :option="libraryOption" v-on:hideAlert="hideAlert"></libraryAlert>
         </div>
         <div class="page-wrapper">
-            <page v-on:nextPage="nextPage" v-on:lastPage="lastPage"></page>
+            <page v-on:nextPage="nextPage" v-on:lastPage="lastPage" v-on:maxPageChange="maxPageChange"></page>
         </div>
     </div>
 </template>
@@ -40,11 +40,11 @@ import page from 'components/page/page'
 export default {
     data() {
         return {
-            tableSize: {
-                height: 450,
-                top: 0
+            tablePos: {
+                top: 43
             },
             currentPage: 1,
+            maxPage: 0,
             showLibraryAlert: false,
             showSubjectAlert: false,
             libraryOption: {
@@ -76,17 +76,18 @@ export default {
                     '前端',
                     'C/C++',
                     '计算机网络',
-                    'JAVA'
+                    'JAVA',
+                    '软件测试'
                 ]
             }
         }
     },
     created() {
-        axios.get('http://localhost:4000/libraryInfo?page=1')
+        axios.get('http://localhost:4000/libraryInfo')
             .then((response) => {
-                let data = JSON.parse(response.data.data);
-                this.currentPage = response.data.page;
+                let data = response.data;
                 this.items = Array.from(data);
+                this.maxPage = Math.ceil(this.items.length / 8)
             })
     },
     methods: {
@@ -96,7 +97,7 @@ export default {
         },
         changeType(select) {
             this.$store.dispatch('setSelect', { select })
-            this.tableSize.top = 0
+            this.tablePos.top = 43
         },
         showAlert(index) {
             this.showLibraryAlert = true
@@ -124,29 +125,20 @@ export default {
             this.showLibraryAlert = false
         },
         nextPage() {
-            this.currentPage++
-            axios.get('http://localhost:4000/libraryInfo?page=' + this.currentPage)
-                .then((response) => {
-                    let data = JSON.parse(response.data.data);
-                    this.currentPage = response.data.page;
-                    data.forEach((e, i) => {
-                        this.items.push(e)
-                    })
-                    if (this.items.length > 8) {
-                        this.tableSize.height *= 2
-                        this.tableSize.top -= 460
-                    }
-                })
+            if (this.currentPage < this.maxPage) {
+                this.currentPage ++
+                this.tablePos.top -= 400
+            }
         },
         lastPage() {
             if (this.currentPage > 1) {
                 this.currentPage--
+                this.tablePos.top += 400
             }
-            axios.get('http://localhost:4000/libraryInfo?page=' + this.currentPage)
-                .then((response) => {
-                    //     let data = JSON.parse(response.data.data);
-                    //     this.currentPage = response.data.page;
-                })
+        },
+        maxPageChange(maxPage) {
+            this.maxPage = maxPage
+            this.currentPage = 1
         }
     },
     components: {
@@ -189,20 +181,22 @@ export default {
       height: 34px
   .table-wrapper
     position: relative
+    height: 443px
+    overflow:hidden
     margin-top: 20px
     margin-left: auto
     margin-right: auto
     width: 97%
   .swap-wrapper
     position: fixed
-    z-index: 100
+    z-index: 1000
     width: 100%
     height: 100%
     top: 0
     left: 0
   .alert-wrapper
     position: fixed
-    z-index: 101
+    z-index: 1000
     width: 500px
     height: 500px
     left: 50%

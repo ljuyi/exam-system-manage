@@ -19,18 +19,11 @@ app.get('/', function (req, res) {
     res.send('Hello world!');
 });
 app.get('/libraryInfo', function(req, res) {
-    let query = req.query
-    let page = query.page
     fs.readFile('./libraryInfo.json', (err, data) => {
         if (err) {
             console.log(err)
         } else {
-            let d = JSON.parse(data)
-            let maxPage = Math.ceil(d.length / 8)
-            if(page > maxPage) {
-                page  = maxPage
-            }
-            res.send({page: page, data: JSON.stringify(d.slice(8*page-8, 8*page>d.length?d.length:8*page))})
+           res.send(JSON.stringify(JSON.parse(data)))
         }
     })
 })

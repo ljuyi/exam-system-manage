@@ -1,12 +1,12 @@
 <template>
-  <div class="vuetable" ref="table" :style="{top:size.top+'px',height:size.height}">
+  <div class="vuetable">
     <table>
       <thead>
         <tr>
           <th v-for="(field, key, value) in fields" :style="{width:grid[key]}">{{field}}</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody ref="table" :style="{top:size.top+'px',height:'400px'}">
         <tr v-for="(item, index) in items" v-if="select==='全部'||select===item['type']" @click.stop="showAlert(index)">
           <td v-for="(value, key, index) in item" :class="key" :style="{width:grid[index]}">{{value}}</td>
           <td class="operation" :style="{width:grid[grid.length-1]}">
@@ -29,8 +29,10 @@ export default {
   mounted() {
     this.$watch('$store.getters.getSelect', () => {
       this.select = this.$store.getters.getSelect
+      this.$nextTick(() => {
+        this.$store.dispatch('setTrNumber', {number: this.$refs.table.getElementsByTagName('tr').length})
+      })
     })
-    console.log(this.$refs.table.style.height)
     this.$refs.table.style.height = this.size.height
   },
   props: {
@@ -68,14 +70,15 @@ export default {
 </script>
 <style lang="stylus">
 .vuetable
-  position: absolute
   width: 100%
   height: 100%
   table
     width: 100%
     thead
+      position: absolute
+      z-index: 101
       width: 100%
-      height: 30px
+      height: 42px
       background: #d9edf7
       border-bottom: 1px #DDD solid
       &>tr
@@ -89,8 +92,10 @@ export default {
           font-weight: bold
           color: #333
     tbody
+      position: absolute
       width: 100%
       &>tr
+        display: block
         width: 100%
         cursor: pointer
         justify-content: space-around
@@ -102,9 +107,9 @@ export default {
           background: #d0e9c6
         &>td
           display: inline-block
-          height: 50px
+          height: 48px
           text-align: center
-          line-height: 50px
+          line-height: 48px
           overflow: hidden
           text-overflow: ellipsis
           white-space: nowrap
