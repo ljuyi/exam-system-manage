@@ -6,6 +6,7 @@ import examSummary from 'views/exam_summary/exam_summary'
 import studentManage from 'views/student_manage/student_manage'
 import examManage from 'views/exam_manage/exam_manage'
 import gradeDetail from 'views/grade_details/grade_details'
+import superManage from 'views/super_manage/super_manage'
 export default [
     {
         path: '/',
@@ -15,6 +16,7 @@ export default [
     {
         path: '/manage',
         name: 'manage',
+        redirect: '/manage/exam-summary',
         component: manage,
         children: [
             {
@@ -46,18 +48,18 @@ export default [
                 path: 'grade-details',
                 name: 'gradeDetails',
                 component: gradeDetail
-            }
+            },
             //     {
             //         path: '/subject-library',
             //         name: 'subjectLibary',
             //         component: ''
             //     },
             //     ,
-            //     {
-            //         path: '/member-manage',
-            //         name: 'memeberManage',
-            //         component: ''
-            //     },
+            {
+                path: 'super-manage',
+                name: 'memeberManage',
+                component: superManage
+            }
             //     {
             //         path: '/exam-grade',
             //         name: 'examGrade',

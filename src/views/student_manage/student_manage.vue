@@ -5,7 +5,7 @@
         </h1>
         <div class="input">
             <div class="drop-wrapper">
-                <dropselect :option="this.selectOption"></dropselect>
+                <dropselect :option="this.selectOption" v-on:changeType="changeType"></dropselect>
             </div>
             <div class="input-wrapper">
                 <inputtext></inputtext>
@@ -29,6 +29,7 @@ export default {
             selectOption: {
                 type: '全部',
                 select: [
+                    '全部',
                     '前端',
                     '计算机网络',
                     'JAVA',
@@ -70,6 +71,10 @@ export default {
                 .then((response) => {
                     console.log(response)
                 })
+        },
+        changeType(select) {
+            this.$store.dispatch('setSelect', { select })
+            this.tablePos.top = 43
         }
     },
     components: {

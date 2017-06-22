@@ -94,7 +94,7 @@ export default {
                 {
                     icon: 'icon-ioslockedoutline',
                     content: '超级管理',
-                    router: '/manage'
+                    router: '/manage/super-manage'
                 }
             ]
         }

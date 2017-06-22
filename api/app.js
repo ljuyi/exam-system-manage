@@ -63,6 +63,15 @@ app.get('/examManage', function(req, res) {
         }
     })
 })
+app.get('/superManage', function(req, res) {
+    fs.readFile('./superManage.json', (err, data) => {
+        if (err) {
+            console.log(err)
+        } else {
+            res.send(data)
+        }
+    })
+})
 app.get('/gradeDetails', function(req, res) {
     fs.readFile('./gradeDetail.json', (err, data) => {
         if (err) {

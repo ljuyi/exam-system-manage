@@ -27,6 +27,9 @@ export default {
         login() {
             if (this.name !== null && this.psd !== null && this.type !== null) {
                 this.$store.dispatch('LOGIN', { name: this.name, psd: this.psd, type: this.type });
+                window.localStorage.setItem('xzyuser', this.name)
+                window.localStorage.setItem('xzypsd', this.psd)
+                window.localStorage.setItem('xzytype', this.type)
                 this.$router.replace('/manage');
             }
         }

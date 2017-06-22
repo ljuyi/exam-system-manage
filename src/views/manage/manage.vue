@@ -38,9 +38,15 @@ export default {
         'v-footer': footer
     },
     mounted() {
-        // if (!this.$store.getters.getManager) {
-        //     this.$router.push('/');
-        // }
+        let name = window.localStorage.getItem('xzyuser')
+        let psd = window.localStorage.getItem('xzypsd')
+        let type = window.localStorage.getItem('xzytype')
+        if (name) {
+            this.$store.dispatch('LOGIN', {name, psd, type})
+        }
+         if (!this.$store.getters.getManager) {
+             this.$router.push('/');
+         }
     }
 }
 </script>

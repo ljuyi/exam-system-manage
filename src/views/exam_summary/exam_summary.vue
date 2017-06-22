@@ -28,31 +28,31 @@ import dropselect from 'components/dropselect/dropselect'
 import inputtext from 'components/inputtext/inputtext'
 import axios from 'axios'
 export default {
-  data() {
-      return {
-          items: [],
-          selectOption: {
-              type: '全部',
-              select: [
-                  '前端',
-                  '计算机网络',
-                  'JAVA',
-                  'C/C++',
-                  '软件测试'
-              ]
-          }
-      }
-  },
-  created() {
-    axios.get('http://localhost:4000/examInfo')
-        .then((response) => {
-            this.items = response.data
-        })
-  },
-  components: {
-      dropselect,
-      inputtext
-  }
+    data() {
+        return {
+            items: [],
+            selectOption: {
+                type: '全部',
+                select: [
+                    '前端',
+                    '计算机网络',
+                    'JAVA',
+                    'C/C++',
+                    '软件测试'
+                ]
+            }
+        }
+    },
+    created() {
+        axios.get('http://localhost:4000/examInfo')
+            .then((response) => {
+                this.items = response.data
+            })
+    },
+    components: {
+        dropselect,
+        inputtext
+    }
 }
 </script>
 <style lang="stylus">
