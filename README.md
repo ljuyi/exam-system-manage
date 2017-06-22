@@ -59,6 +59,10 @@
 
 #### 后台页面重构
 - [x] home.html(后台主页面) -- 公用组件完成
-- [x] exam-manage
-- [ ] 
-
+- [x] library-info -- 功能开发完毕
+- [x] exam-manage -- 样式和部分功能开发完毕
+- [x] exam-summary -- 同上
+- [x] grade-details -- 同上
+- [x] lesson-info -- 同上
+- [x] student-manage -- 同上
+- [x] super-manage -- 同上
