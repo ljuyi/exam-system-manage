@@ -1,5 +1,8 @@
 # 新卓越考试系统 vue + vue-router + vuex 重构
 
+### 基本功能演示
+![image](https://github.com/ljuyi/exam-system-manage/blob/master/static/image/view.gif)
+
 ### 目录结构
 ```
 |-- api                                                         // 与静态资源交互目录
